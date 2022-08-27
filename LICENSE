@@ -1,24 +1,65 @@
-This is free and unencumbered software released into the public domain.
+def submit():
 
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+    food = []
 
-In jurisdictions that recognize copyright laws, the author or authors
-of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+    for index in listbox.curselection():
+        food.insert(index,listbox.get(index))
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+    if food == []:
+         print("Please your orders sir! \n NOTHING!? What a shame!")
+    else:
+     print("Aye aye sir!:")
+    for index in food:
+     print(index)
 
-For more information, please refer to <https://unlicense.org>
+def add():
+    listbox.insert(listbox.size(),entryBox.get())
+    listbox.config(height=listbox.size())
+
+
+def delete():
+    for index in reversed(listbox.curselection()):
+        listbox.delete(index)
+
+    listbox.config(height=listbox.size())
+
+from tkinter import *
+
+window = Tk()
+window.configure(background="Indigo")
+
+listbox = Listbox(window,
+                  fg="Purple",
+                  bg="Black",
+                  font=("Impact",35),
+                  width=14,
+                  selectmode=MULTIPLE)
+listbox.pack()
+
+listbox.insert(1,"Burger")
+listbox.insert(2,"Fish")
+listbox.insert(3,"Cake")
+listbox.insert(4,"Beaf")
+listbox.insert(5,"Chicken Wings")
+
+listbox.config(height=listbox.size())
+
+entryBox = Entry(window)
+entryBox.pack()
+
+frame = Frame(window)
+frame.pack()
+
+submitButton = Button(frame,text="submit",command=submit)
+submitButton.pack(side=LEFT)
+
+addButton = Button(frame,text="add",command=add)
+addButton.pack(side=LEFT)
+
+deleteButton = Button(frame,text="delete",command=delete)
+deleteButton.pack(side=LEFT)
+
+window.mainloop()
+
+
+
